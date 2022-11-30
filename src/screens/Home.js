@@ -29,7 +29,7 @@ class Home extends Component {
   render() {
     const { navigation } = this.props;
     const { posts } = this.props;
-    if (posts.length === 0) return <View></View>;
+    if (posts.length === 0) return null;
     return (
       <View style={{ flex: 1 }}>
         <ScrollView bounces={false} style={styles.listContainter}>
@@ -46,18 +46,22 @@ class Home extends Component {
     );
   }
 }
+
 const mapDispatchToProps = (dispatch, props) => {
   return {
     fetchPosts: () => dispatch(FetchPostsRequest()),
     postLogin: () => dispatch(LoginRequest("vucms", "vucms")),
   };
 };
+
 const mapStateToProps = (state) => {
   return {
     posts: state.posts,
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
 const screenHeight = Math.round(Dimensions.get("window").height);
 const styles = StyleSheet.create({
   container: {
